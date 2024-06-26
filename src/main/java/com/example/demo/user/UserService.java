@@ -14,12 +14,12 @@ public record UserService (
                         .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         }
 
-        public void addNewUser(UserDto userDto) {
+        public User addNewUser(UserDto userDto) {
                 User user = User.builder()
                         .username(userDto.username())
                         .telephone(userDto.telephone())
                         .language(userDto.language())
                         .build();
-                userDao.save(user);
+                return userDao.save(user);
         }
 }

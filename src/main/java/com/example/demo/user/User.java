@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 
 @Entity
-@Table
+@Table(name = "appuser")
 @Builder
 public class User {
     @Id
@@ -15,7 +15,7 @@ public class User {
     @Column(name = "username", nullable = false, length = 20, unique = true)
     private String username;
 
-    @Column(name = "telephone", nullable = false, length = 8, unique = true)
+    @Column(name = "telephone", nullable = false)
     private Integer telephone;
 
     @Column(name = "language", nullable = false, length = 10)
@@ -23,6 +23,13 @@ public class User {
 
     public User() {
 
+    }
+
+    public User(Long id, String username, Integer telephone, String language) {
+        this.id = id;
+        this.username = username;
+        this.telephone = telephone;
+        this.language = language;
     }
 
     public Long getId() {
