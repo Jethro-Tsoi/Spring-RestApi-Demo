@@ -25,6 +25,19 @@ public class DefaultExceptionHandler {
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(ResourceAlreadyExistException.class)
+    public ResponseEntity<ApiError> handleResourceAlreadyExistExceptionException(ResourceAlreadyExistException e,
+                                                                    HttpServletRequest request) {
+        ApiError apiError = new ApiError(
+                request.getRequestURI(),
+                e.getMessage(),
+                HttpStatus.CONFLICT.value(),
+                LocalDateTime.now()
+        );
+
+        return new ResponseEntity<>(apiError, HttpStatus.CONFLICT);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiError> handleMethodArgumentNotValidExceptionException(MethodArgumentNotValidException e,
                                                                     HttpServletRequest request) {

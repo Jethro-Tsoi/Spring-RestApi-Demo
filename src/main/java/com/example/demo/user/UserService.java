@@ -1,5 +1,6 @@
 package com.example.demo.user;
 
+import com.example.demo.exception.ResourceAlreadyExistException;
 import com.example.demo.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,6 +24,9 @@ public record UserService (
         public User addNewUser(UserDto userDto) {
                 try {
                         log.info("Adding new user: {}", userDto);
+                        userDao.getUserByUsername(userDto.username()).ifPresent(existingUser -> {
+                                throw new ResourceAlreadyExistException("Username already taken");
+                        });
                         User user = User.builder()
                                 .username(userDto.username())
                                 .telephone(userDto.telephone())
