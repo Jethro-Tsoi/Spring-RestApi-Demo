@@ -18,7 +18,7 @@ public class User {
     @Column(name = "telephone", nullable = false)
     private Integer telephone;
 
-    @Column(name = "language", nullable = false, length = 10)
+    @Column(name = "language", nullable = false, length = 20)
     private String language;
 
     public User() {
