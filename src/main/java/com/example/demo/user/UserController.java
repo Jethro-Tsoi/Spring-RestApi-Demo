@@ -1,5 +1,6 @@
 package com.example.demo.user;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,7 +15,7 @@ public record UserController (
     }
 
     @PostMapping
-    public User registerNewUser(@RequestBody UserDto userDto) {
+    public User registerNewUser(@Validated @RequestBody UserDto userDto) {
         return userService.addNewUser(userDto);
     }
 }
